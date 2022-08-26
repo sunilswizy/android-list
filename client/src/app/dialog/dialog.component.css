@@ -1,0 +1,19 @@
+.mat-form-field {
+    width: 100%;
+}
+
+.radio-container {
+    display: flex;
+    flex-direction: column;
+    gap:13px;
+    margin-bottom: 23px;
+}
+
+.btns{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.inValid {
+    color: red;
+}
