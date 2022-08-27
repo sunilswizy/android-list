@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="card">
+        <mat-card class="example-card">
+            <mat-card-subtitle>android play</mat-card-subtitle>
+            <mat-card-title class="text">Playground of Android World</mat-card-title>
+            <mat-card-content class="margin">
+            </mat-card-content>
+            <mat-divider inset></mat-divider>
+            <mat-card-title><h2 class="card-title">Login</h2></mat-card-title>
+
+            <form [formGroup]="loginForm">
+            <div class="parent-form">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Username </mat-label>
+                    <input formControlName="userName" matInput autocomplete="off">
+                </mat-form-field>
+            </div>
+
+
+            <div class="parent-form">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>password </mat-label>
+                    <input formControlName="password" matInput type="password">
+                </mat-form-field>
+            </div>
+
+            </form>
+
+            <mat-divider inset></mat-divider>
+            
+            <div class="btns" mat-dialog-actions>
+                <button mat-stroked-button (click)="clear()">clear</button>
+                <button mat-raised-button color="warn" (click)="login()">login</button>
+            </div>
+            <mat-card-footer>
+            <mat-progress-bar color="warn" [mode]="'determinate'"></mat-progress-bar>
+            </mat-card-footer>
+        </mat-card>
+    </div>
+</div>

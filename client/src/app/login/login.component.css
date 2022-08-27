@@ -1,0 +1,51 @@
+.example-card {
+  max-width: 600px;
+  box-shadow: 3px 2px 19px 5px rgba(34, 34, 34, .3);
+
+}
+
+.text {
+  color: #f44336;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.btns {
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.card {
+  width: 650px;
+  height: 600px;
+}
+
+.card-title {
+  text-align: center;
+  margin: 25px 0;
+  font-size: 30px !important;
+}
+
+.form-field {
+  width: 80%;
+}
+
+.parent-form {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.margin {
+  margin: 20px 0;
+}

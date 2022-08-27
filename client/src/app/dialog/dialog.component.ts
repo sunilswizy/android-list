@@ -26,16 +26,15 @@ export class DialogComponent implements OnInit {
   }
 
   addProducts() {
+    
+    this.validateField("productName");
+    this.validateField("comment");
+    this.radioClass = !this.description?.value;
+    this.category?.markAllAsTouched()
+    this.date?.markAllAsTouched()
+
     if(this.productForm.valid) {
-      console.log("Submitted....!")
-    }
-    else {
-      
-      this.validateField("productName");
-      this.validateField("comment");
-      this.radioClass = !this.description?.value;
-      this.category?.markAllAsTouched()
-      this.date?.markAllAsTouched()
+      console.log("Submitted....!");
     }
   }
 

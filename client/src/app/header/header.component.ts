@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { GlobalService } from '../service/global.service';
 
 @Component({
   selector: 'app-header',
@@ -9,9 +10,14 @@ import { DialogComponent } from '../dialog/dialog.component';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private dialog : MatDialog) { }
+  title :string = '';
+
+  constructor(private dialog : MatDialog, private globalService: GlobalService) { }
 
   ngOnInit(): void {
+    this.globalService.getHomeTitle().subscribe((res) => {
+      this.title = res.title;
+    })
   }
 
    openDialog() {

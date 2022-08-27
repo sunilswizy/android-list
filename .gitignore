@@ -7,7 +7,7 @@
 /bazel-out
 
 client/node_modules
-
+.env
 # Node
 /node_modules
 npm-debug.log
