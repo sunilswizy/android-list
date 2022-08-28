@@ -3,7 +3,6 @@ require('dotenv').config()
 
 function verifyToken(req, res , next){
     const token = req.headers['authorization']
-
     if(token) {
         req.token = token;
         next();

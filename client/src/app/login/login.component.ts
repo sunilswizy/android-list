@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm !: FormGroup;
+  loader : "determinate" | "indeterminate" = "determinate";
+  title = '';
 
   constructor(private fg: FormBuilder, 
               private globalService : GlobalService,
@@ -22,10 +24,15 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fg.group({
       userName: ['', Validators.required],
       password: ['', Validators.required]
+    });
+
+    this.globalService.getHomeTitle().subscribe(res => {
+      this.title = res.title.toLocaleLowerCase();
     })
   }
 
   login() {
+    this.loader = "indeterminate";
     this.loginForm.patchValue({
       userName: this.userName?.value.trim(),
       password: this.password?.value.trim()
@@ -46,6 +53,9 @@ export class LoginComponent implements OnInit {
             this.router.navigate([''])
       })
     }
+    setTimeout(()=> {
+      this.loader = "determinate";
+    }, 1000)
   }
 
   clear() {

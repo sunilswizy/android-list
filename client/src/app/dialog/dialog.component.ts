@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { GlobalService } from '../service/global.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog',
@@ -12,7 +15,11 @@ export class DialogComponent implements OnInit {
   productForm !: FormGroup;
   radioClass : boolean = false;
 
-  constructor(private formBuilder : FormBuilder) { }
+  constructor(private formBuilder : FormBuilder,
+              private _snackBar : MatSnackBar,
+              private globalService: GlobalService,
+              private dialog: MatDialog
+              ) { }
 
   ngOnInit(): void {
     this.productForm = this.formBuilder.group({
@@ -34,7 +41,25 @@ export class DialogComponent implements OnInit {
     this.date?.markAllAsTouched()
 
     if(this.productForm.valid) {
-      console.log("Submitted....!");
+
+      const payload = {
+        productName: this.productName?.value,
+        date: this.date?.value,
+        price: this.price?.value,
+        description: this.description?.value,
+        category: this.category?.value,
+        comment: this.comment?.value
+      }
+
+      this.globalService.addProduct(payload).subscribe(res => {
+        if(res.success) {
+          this.openSnackBar(res.message)
+        }
+        else {
+          this.openSnackBar("Failed to add product, try again later")
+        }
+        this.dialog.closeAll();
+      })
     }
   }
 
@@ -67,6 +92,13 @@ export class DialogComponent implements OnInit {
 
   get comment() {
     return this.productForm.get('comment')
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'clear', {
+      horizontalPosition: "right",
+      verticalPosition: "top",
+    });
   }
 
 }

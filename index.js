@@ -18,17 +18,32 @@ app.get('/home', (_req, res) => {
     res.send({title: "Android Play"})
 })
 
-app.post('/add', Utils.verifyToken,  (req, res) => {
-
-    jwt.verify(req.token, key, (err, authData) => {
-        if(err) res.sendStatus(403); 
-        else {
-            res.json({
-                message: "product added",
-                data: authData
-            })
+app.post('/addProducts', Utils.verifyToken,  (req, res) => {
+    try {
+        Utils.validateToken(req.token).then(valid => {
+            if(valid) {
+                console.log("paylaod", req.body)
+                res.json({
+                    message: "product added succesfully",
+                    success: true
+                })
+            }
+            else {
+                res.json({
+                    message: "Authorization failed",
+                    status: 403,
+                    success: false
+                })
+            }
+        }) 
         }
-    })
+    catch(e) {
+        res.json({
+            message: "Authorization failed",
+            status: 403,
+            success: false
+        });
+    }
 })
 
 //login
@@ -52,14 +67,13 @@ app.post('/api/login', (req, res) => {
 
 app.post('/api/verify', async (req, res) => {
     try {
-        const token = JSON.parse(req.body.token).token
+        const token = req.headers['authorization']
         const data = await Utils.validateToken(token)
         res.send(data)
     }
     catch(e) {
         res.send(false)
     }
-    
 })
 
 

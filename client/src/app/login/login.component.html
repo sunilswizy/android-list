@@ -1,7 +1,7 @@
 <div class="container">
     <div class="card">
         <mat-card class="example-card">
-            <mat-card-subtitle>android play</mat-card-subtitle>
+            <mat-card-subtitle>{{title}}</mat-card-subtitle>
             <mat-card-title class="text">Playground of Android World</mat-card-title>
             <mat-card-content class="margin">
             </mat-card-content>
@@ -33,7 +33,7 @@
                 <button mat-raised-button color="warn" (click)="login()">login</button>
             </div>
             <mat-card-footer>
-            <mat-progress-bar color="warn" [mode]="'determinate'"></mat-progress-bar>
+            <mat-progress-bar color="warn" [mode]="loader"></mat-progress-bar>
             </mat-card-footer>
         </mat-card>
     </div>
