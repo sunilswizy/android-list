@@ -49,3 +49,7 @@
 .margin {
   margin: 20px 0;
 }
+
+.err-msg {
+  color: red;
+}

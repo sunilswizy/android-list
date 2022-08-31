@@ -11,18 +11,12 @@
             <form [formGroup]="loginForm">
             <div class="parent-form">
                 <mat-form-field appearance="outline" class="form-field">
-                    <mat-label>Username </mat-label>
-                    <input formControlName="userName" matInput autocomplete="off">
+                    <mat-label>Enter your good name... </mat-label>
+                    <input (change)="handleChange()" formControlName="userName" matInput autocomplete="off">
+                    <mat-hint><span class="err-msg" *ngIf="showMsg">enter your name</span></mat-hint>
                 </mat-form-field>
             </div>
 
-
-            <div class="parent-form">
-                <mat-form-field appearance="outline" class="form-field">
-                    <mat-label>password </mat-label>
-                    <input formControlName="password" matInput type="password">
-                </mat-form-field>
-            </div>
 
             </form>
 

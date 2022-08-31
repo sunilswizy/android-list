@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm !: FormGroup;
   loader : "determinate" | "indeterminate" = "determinate";
   title = '';
+  showMsg = false;
 
   constructor(private fg: FormBuilder, 
               private globalService : GlobalService,
@@ -22,8 +23,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fg.group({
-      userName: ['', Validators.required],
-      password: ['', Validators.required]
+      userName: ['']
     });
 
     this.globalService.getHomeTitle().subscribe(res => {
@@ -34,13 +34,11 @@ export class LoginComponent implements OnInit {
   login() {
     this.loader = "indeterminate";
     this.loginForm.patchValue({
-      userName: this.userName?.value.trim(),
-      password: this.password?.value.trim()
+      userName: this.userName?.value.trim()
     });
 
-    if (!this.loginForm.valid) {
-      this.userName?.markAllAsTouched();
-      this.password?.markAllAsTouched();
+    if (!this.userName?.value) {
+      this.showMsg = true;
     }
     else {
 
@@ -49,7 +47,7 @@ export class LoginComponent implements OnInit {
       }
 
       this.globalService.login(payload).subscribe((response) => {
-            localStorage.setItem('android', JSON.stringify({token: response.token}));
+            localStorage.setItem('android', JSON.stringify({token: response.token, user_id: response.data.user_id}));
             this.router.navigate([''])
       })
     }
@@ -59,15 +57,14 @@ export class LoginComponent implements OnInit {
   }
 
   clear() {
-    this.loginForm.patchValue({ userName: null, password: null })
+    this.loginForm.patchValue({ userName: null })
   }
 
   get userName(){
     return this.loginForm.get('userName')
   }
 
-  get password() {
-    return this.loginForm.get('password')
+  handleChange() {
+    this.showMsg = false;
   }
-
 }

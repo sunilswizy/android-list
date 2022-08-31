@@ -96,6 +96,7 @@ export class DialogComponent implements OnInit {
 
   openSnackBar(message: string) {
     this._snackBar.open(message, 'clear', {
+      duration: 3000,
       horizontalPosition: "right",
       verticalPosition: "top",
     });
