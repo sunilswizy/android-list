@@ -57,9 +57,14 @@ export class GlobalService {
 
   public addProduct(payload: AddProducts): Observable<any> {
     payload.user_id = this.user_id;
-    return this.http.post<any>(this.apiUrl + '/addProducts', payload, 
+    return this.http.post<any>(this.apiUrl + '/products', payload, 
         {headers: this.headers})
         .pipe(catchError(this.handleError))
+  }
+
+  public getAllProduct(): Observable<any> {
+    return this.http.get<any>(this.apiUrl + '/products', {headers: this.headers})
+           .pipe(catchError(this.handleError))
   }
   
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { GlobalService } from '../service/global.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -14,6 +14,7 @@ export class DialogComponent implements OnInit {
   fressList : string[] = ["Brand new", "Second hand", "Refurnishred"]
   productForm !: FormGroup;
   radioClass : boolean = false;
+  @Output() addProduct = new EventEmitter<any>;
 
   constructor(private formBuilder : FormBuilder,
               private _snackBar : MatSnackBar,
@@ -53,7 +54,9 @@ export class DialogComponent implements OnInit {
 
       this.globalService.addProduct(payload).subscribe(res => {
         if(res.success) {
-          this.openSnackBar(res.message)
+          this.openSnackBar(res.message);
+          this.addProduct.emit(payload)
+          this.productForm.reset();
         }
         else {
           this.openSnackBar("Failed to add product, try again later")

@@ -1,0 +1,29 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .child-con{
+    width: 90%;
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+.icons{
+  cursor: pointer;
+}
+
+.del {
+  color: #f44336;
+}
